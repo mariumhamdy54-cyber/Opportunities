@@ -1,0 +1,1085 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة فرص الشباب المصري</title>
+    <meta http-equiv="refresh" content="50000">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --egypt-red: #ce1126;
+            --egypt-white: #ffffff;
+            --egypt-black: #000000;
+            --gold: #c19a3f;
+            --dark-blue: #003087;
+            --light-blue: #007a3d;
+            --light-gray: #f5f5f5;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* الصفحة الرئيسية */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-bottom: 80px; /* مساحة للقائمة السفلية */
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* الهيدر */
+        .header {
+            background: linear-gradient(to right, var(--egypt-red), var(--egypt-black));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* محرك البحث */
+        .search-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .search-box {
+            display: flex;
+            background: white;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--egypt-red);
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+        
+        .search-box button {
+            background: var(--egypt-red);
+            color: white;
+            border: none;
+            padding: 0 2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-box button:hover {
+            background: var(--dark-blue);
+        }
+        
+        /* صناديق الفرص */
+        .opportunities-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            border-top: 5px solid var(--egypt-red);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .category-header {
+            background: linear-gradient(to right, var(--egypt-red), var(--dark-blue));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .category-header i {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .category-header h3 {
+            font-size: 1.5rem;
+        }
+        
+        .category-description {
+            padding: 1.5rem;
+            color: #555;
+            height: 120px;
+            overflow: hidden;
+        }
+        
+        /* الصفحات الداخلية */
+        .page-title {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--egypt-red);
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .page-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gold);
+            border-radius: 2px;
+        }
+        
+        .options-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            padding: 2rem;
+        }
+        
+        .option-card {
+            width: 300px;
+            height: 200px;
+            background: white;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 3px solid transparent;
+        }
+        
+        .option-card:hover {
+            transform: scale(1.05);
+            border-color: var(--egypt-red);
+        }
+        
+        .option-card i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--dark-blue);
+        }
+        
+        .option-card h3 {
+            font-size: 1.8rem;
+            color: var(--egypt-red);
+        }
+        
+        /* صفحة الفرص التفصيلية */
+        .opportunity-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            margin-bottom: 1.5rem;
+        }
+        
+        .opportunity-card.expanded {
+            grid-column: 1 / -1;
+            transform: scale(1.02);
+            z-index: 10;
+        }
+        
+        .opportunity-header {
+            background: linear-gradient(to right, var(--light-blue), var(--dark-blue));
+            color: white;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .opportunity-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .opportunity-type {
+            background: var(--gold);
+            color: var(--egypt-black);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .opportunity-body {
+            padding: 1.5rem;
+            max-height: 150px;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .opportunity-card.expanded .opportunity-body {
+            max-height: 500px;
+        }
+        
+        .opportunity-footer {
+            padding: 0 1.5rem 1.5rem;
+            display: none;
+        }
+        
+        .opportunity-card.expanded .opportunity-footer {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .register-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--egypt-red);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .register-btn:hover {
+            background: var(--dark-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* القائمة السفلية */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 0.8rem 0;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 0.5rem;
+            border-radius: 8px;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background: rgba(206, 17, 38, 0.1);
+            color: var(--egypt-red);
+        }
+        
+        .nav-item i {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .nav-item span {
+            font-size: 0.9rem;
+        }
+        
+        /* القائمة الجانبية */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background: white;
+            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            transition: right 0.4s ease;
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+        }
+        
+        .side-menu.active {
+            right: 0;
+        }
+        
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .menu-header h3 {
+            color: var(--egypt-red);
+            font-size: 1.5rem;
+        }
+        
+        .close-menu {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .menu-item {
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            border-right: 4px solid transparent;
+        }
+        
+        .menu-item:hover {
+            background: rgba(206, 17, 38, 0.1);
+            border-right-color: var(--egypt-red);
+            padding-right: 1.5rem;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--light-blue);
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .back-btn:hover {
+            background: var(--dark-blue);
+        }
+        
+        /* صفحة المعلومات */
+        .info-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+        
+        .info-container h2 {
+            color: var(--egypt-red);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gold);
+        }
+        
+        .info-container p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        /* التجاوب مع الشاشات المختلفة */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .opportunities-container {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+            
+            .options-container {
+                padding: 1rem;
+            }
+            
+            .option-card {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .nav-item span {
+                font-size: 0.8rem;
+            }
+            
+            .side-menu {
+                width: 280px;
+            }
+        }
+        
+        /* تخصيص شريط التمرير */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--egypt-red);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--dark-blue);
+        }
+    </style>
+</head>
+<body>
+    <!-- الصفحة الرئيسية -->
+    <div id="home-page" class="page active">
+        <header class="header">
+            <h1>منصة فرص الشباب المصري</h1>
+            <p>منصة تجمع فرص التطوع والبرامج والمسابقات المصرية للشباب في الداخل والخارج. اكتشف فرصًا جديدة لتطوير مهاراتك وبناء مستقبلك.</p>
+        </header>
+        
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="ابحث عن فرصة (برنامج، مسابقة، تدريب، منحة...)">
+                <button id="search-btn"><i class="fas fa-search"></i> بحث</button>
+            </div>
+        </div>
+        
+        <h2 class="page-title">الفئات الرئيسية</h2>
+        
+        <div class="opportunities-container" id="main-categories">
+            <!-- سيتم تعبئة هذه الصناديق بواسطة JavaScript -->
+        </div>
+    </div>
+    
+    <!-- صفحة الاختيار بين محلي ودولي -->
+    <div id="category-page" class="page">
+        <div class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-right"></i> العودة
+        </div>
+        <h2 class="page-title" id="category-title">البرامج</h2>
+        
+        <div class="options-container">
+            <div class="option-card" data-type="local">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>محلي</h3>
+                <p>فرص داخل مصر</p>
+            </div>
+            
+            <div class="option-card" data-type="international">
+                <i class="fas fa-globe-africa"></i>
+                <h3>دولي</h3>
+                <p>فرص خارج مصر</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- صفحة الفرص التفصيلية -->
+    <div id="opportunities-page" class="page">
+        <div class="back-btn" onclick="goBack()">
+            <i class="fas fa-arrow-right"></i> العودة
+        </div>
+        <h2 class="page-title" id="opportunities-title">الفرص المحلية</h2>
+        
+        <div class="opportunities-container" id="opportunities-list">
+            <!-- سيتم تعبئة الفرص بواسطة JavaScript -->
+        </div>
+    </div>
+    
+    <!-- صفحة معلومات الاتصال -->
+    <div id="contact-page" class="page">
+        <div class="back-btn" onclick="showPage('home-page')">
+            <i class="fas fa-arrow-right"></i> العودة للرئيسية
+        </div>
+        
+        <div class="info-container">
+            <h2>معلومات الاتصال</h2>
+            <p><i class="fas fa-map-marker-alt"></i> العنوان: الجيزة، مصر</p>
+            <p><i class="fas fa-phone"></i> الهاتف: +20 123 456 7890</p>
+            <p><i class="fas fa-envelope"></i> البريد الإلكتروني: info@egypt-youth-opportunities.com</p>
+            <p><i class="fas fa-clock"></i> ساعات العمل: من الأحد إلى الخميس، 9 صباحًا - 5 مساءً</p>
+            
+            <h2>تابعنا على وسائل التواصل الاجتماعي</h2>
+            <p>
+                <a href="#" style="color: var(--egypt-red); margin-right: 1rem;"><i class="fab fa-facebook fa-2x"></i></a>
+                <a href="#" style="color: var(--egypt-red); margin-right: 1rem;"><i class="fab fa-twitter fa-2x"></i></a>
+                <a href="#" style="color: var(--egypt-red); margin-right: 1rem;"><i class="fab fa-linkedin fa-2x"></i></a>
+                <a href="#" style="color: var(--egypt-red); margin-right: 1rem;"><i class="fab fa-instagram fa-2x"></i></a>
+            </p>
+        </div>
+    </div>
+    
+    <!-- صفحة من نحن -->
+    <div id="about-page" class="page">
+        <div class="back-btn" onclick="showPage('home-page')">
+            <i class="fas fa-arrow-right"></i> العودة للرئيسية
+        </div>
+        
+        <div class="info-container">
+            <h2>من نحن</h2>
+            <p>منصة فرص الشباب المصري هي مبادرة وطنية تهدف إلى تمكين الشباب المصري من خلال توفير معلومات شاملة عن الفرص المتاحة لهم داخل مصر وخارجها.</p>
+            <p>تأسست المنصة عام 2025 بهدف جمع كافة الفرص في مكان واحد لتسهيل الوصول إليها وتشجيع الشباب على المشاركة في برامج التنمية والتطوير.</p>
+            
+            <h2>رؤيتنا</h2>
+            <p>أن نكون المنصة الرائدة في العالم العربي التي تمكن الشباب المصري من الوصول إلى أفضل الفرص لتنمية مهاراتهم وخبراتهم.</p>
+            
+            <h2>رسالتنا</h2>
+            <p>توفير بوابة شاملة ومحدثة باستمرار تجمع فرص التطوع والبرامج والمسابقات والتدريبات والمنح والفرص الأخرى التي تفيد الشباب المصري.</p>
+        </div>
+    </div>
+    
+    <!-- صفحة حسابي -->
+    <div id="account-page" class="page">
+        <div class="back-btn" onclick="showPage('home-page')">
+            <i class="fas fa-arrow-right"></i> العودة للرئيسية
+        </div>
+        
+        <div class="info-container">
+            <h2>حسابي</h2>
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <i class="fas fa-user-circle" style="font-size: 5rem; color: var(--dark-blue);"></i>
+            </div>
+            
+            <p>اسم المستخدم: <strong>زائر</strong></p>
+            <p>الحالة: <strong>مستخدم جديد</strong></p>
+            <p>عدد الفرص المتابعة: <strong>0</strong></p>
+            <p>آخر زيارة: <strong>اليوم</strong></p>
+            
+            <button class="register-btn" style="margin-top: 2rem;" onclick="alert('سيتم تفعيل هذه الميزة قريبًا')">تسجيل الدخول / إنشاء حساب</button>
+        </div>
+    </div>
+    
+    <!-- القائمة الجانبية -->
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-header">
+            <h3>قائمة المنصة</h3>
+            <button class="close-menu" onclick="toggleSideMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="menu-item" onclick="showPage('home-page'); toggleSideMenu()">
+            <i class="fas fa-home"></i> الصفحة الرئيسية
+        </div>
+        
+        <div class="menu-item" onclick="showPage('contact-page'); toggleSideMenu()">
+            <i class="fas fa-phone-alt"></i> اتصل بنا
+        </div>
+        
+        <div class="menu-item" onclick="showPage('about-page'); toggleSideMenu()">
+            <i class="fas fa-info-circle"></i> من نحن
+        </div>
+        
+        <div class="menu-item" onclick="showPage('account-page'); toggleSideMenu()">
+            <i class="fas fa-user"></i> حسابي
+        </div>
+        
+        <div class="menu-item" onclick="alert('سيتم تفعيل هذه الميزة قريبًا'); toggleSideMenu()">
+            <i class="fas fa-bell"></i> التنبيهات
+        </div>
+        
+        <div class="menu-item" onclick="alert('سيتم تفعيل هذه الميزة قريبًا'); toggleSideMenu()">
+            <i class="fas fa-bookmark"></i> الفرص المفضلة
+        </div>
+        
+        <div class="menu-item" onclick="alert('سيتم تفعيل هذه الميزة قريبًا'); toggleSideMenu()">
+            <i class="fas fa-cog"></i> الإعدادات
+        </div>
+        
+        <div class="menu-item" onclick="alert('سيتم تفعيل هذه الميزة قريبًا'); toggleSideMenu()">
+            <i class="fas fa-question-circle"></i> المساعدة
+        </div>
+    </div>
+    
+    <!-- القائمة السفلية -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="showPage('home-page')">
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+        </div>
+        
+        <div class="nav-item" onclick="showPage('contact-page')">
+            <i class="fas fa-phone-alt"></i>
+            <span>اتصل بنا</span>
+        </div>
+        
+        <div class="nav-item" onclick="toggleSideMenu()">
+            <i class="fas fa-bars"></i>
+            <span>القائمة</span>
+        </div>
+        
+        <div class="nav-item" onclick="showPage('about-page')">
+            <i class="fas fa-info-circle"></i>
+            <span>من نحن</span>
+        </div>
+        
+        <div class="nav-item" onclick="showPage('account-page')">
+            <i class="fas fa-user"></i>
+            <span>حسابي</span>
+        </div>
+    </div>
+
+    <script>
+        // بيانات الفئات الرئيسية
+        const categories = [
+            {
+                id: "programs",
+                title: "البرامج",
+                icon: "fas fa-laptop-code",
+                description: "برامج تنمية المهارات والتدريب المهني والبرامج التعليمية المتخصصة للشباب المصري."
+            },
+            {
+                id: "competitions",
+                title: "المسابقات",
+                icon: "fas fa-trophy",
+                description: "مسابقات محلية ودولية في مختلف المجالات العلمية والأدبية والفنية والابتكارية."
+            },
+            {
+                id: "conferences",
+                title: "المؤتمرات والفعاليات",
+                icon: "fas fa-calendar-alt",
+                description: "مؤتمرات وفعاليات مهمة تتيح فرص للتواصل والاطلاع على آخر التطورات في مختلف المجالات."
+            },
+            {
+                id: "training",
+                title: "الدورات التدريبية",
+                icon: "fas fa-graduation-cap",
+                description: "دورات تدريبية متخصصة لتنمية المهارات وزيادة الفرص الوظيفية للشباب."
+            },
+            {
+                id: "grants",
+                title: "المنح",
+                icon: "fas fa-hand-holding-usd",
+                description: "منح دراسية وتمويلية للتعليم والبحث والابتكار داخل مصر وخارجها."
+            },
+            {
+                id: "volunteering",
+                title: "التطوع",
+                icon: "fas fa-hands-helping",
+                description: "فرص تطوعية محلية ودولية تتيح للشباب المساهمة في تنمية المجتمع واكتساب الخبرة."
+            }
+        ];
+
+        // بيانات الفرص الحقيقية لكل فئة مع روابط وتواريخ محددة
+        const opportunitiesData = {
+            programs: {
+                local: [
+                    { title: "مبادرة براعم مصر الرقمية 2026", description: "مبادرة مجانية من وزارة الاتصالات لتعليم طلاب المرحلة الابتدائية مهارات البرمجة والتكنولوجيا بشكل مبسط المبادرة مخصصة لطلاب الصف الرابع والخامس والسادس الابتدائي", registrationLink: "https://demi.gov.eg/", deadlineDate: "16 يونيو 2026" },
+                    { title: "مبادرة أشبال مصر الرقمية -البرنامج الصيفي 2026", description: " هو مبادرة موجهة لتنمية مهارات الطلاب في التكنولوجيا والبرمجة والابتكار البرنامج مخصص لطلاب الصف الأول الإعدادي حتى الصف الثاني الثانوي", registrationLink: "https://tinyurl.com/bd22vsz3", deadlineDate: "22 يونيو 2026" },
+                    { title: "مبادرة رواد مصر الرقمية", description: "برنامج متقدم بعد أشبال مصر الرقمية مخصص لطلاب الثانوية والخريجين يركز على تنمية مهارات البرمجة المتقدمة والذكاء الاصطناعي وتحليل البيانات يهدف لتأهيل المشاركين لسوق العمل الرقمي والمشاريع التكنولوجية يشمل التدريب تطبيقات عملية ومسابقات ومشاريع تفاعلية التقديم غالبًا لمن تتراوح أعمارهم بين 16 و22 سنة", registrationLink: "https://depi.gov.eg/register", deadlineDate: "5 ابريل 2026" },
+                    { title: "كيان إرادة شباب مصر", description: "كيان شبابي رسمي تابع لوزارة الشباب والرياضة يهدف لتطوير مهارات الشباب وتأهيلهم لسوق العمل وتشجيع المشاركة المجتمعية. أنشطته الأساسية: ورش تدريبية، مبادرات مجتمعية، دعم ذوي الهمم، توعية طلاب الثانوية والجامعة، وفعاليات وطنية وثقافية. ", registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSewWYb9uxZnTWoW64-KD6JmLFXumYdk-l8qe2ahvcXLYB_Yug/viewform", deadlineDate: " " },
+                    { title: " برنامج سفراء الذكاء الاصطناعي", description: "البرنامج الأكبر لتأهيل غير المتخصصين لاستخدام تقنيات الذكاء الاصطناعي ونشر ثقافة الذكاء الاصطناعي في بيئات العمل.", registrationLink: "https://ese-eg.com/ambassadors/", deadlineDate: "5 ديسمبر 2025" },
+                    { title: "مبادرة سفراء سلامة المرضى.", description: "برنامج أطلقته وزارة الصحة والسكان المصرية لتشجيع أفراد المجتمع والعاملين في القطاع الصحي على نشر ثقافة سلامة المرضى وتعزيز الوعي الصحي بهدف تحسين جودة الخدمات الطبية وحماية المرضى من المخاطر داخل أماكن الرعاية الصحية.", registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSeCdKs79N6YxmsdCTj9FE1I0ZvA-bJMf9KGjylRpZoDswBS0w/viewform?usp=dialog", deadlineDate: "" },
+                    { title: "برنامج منتدى أفكار المشروعات البيئية", description: " البرنامج بيدعم الشباب اللي عندهم أفكار لمشروعات بيئية وعايزين يطوّروها، وده بالتعاون مع مؤسسة القيادات المصرية للتنمية LEAD.", registrationLink: "https://bit.ly/47TvTUk", deadlineDate: "" },
+                    { title: "مبادرة المبدع الرقمي – جيل يحكي", description: "مبادرة وطنية هدفها دعم وتمكين الشباب في المجالات الإبداعية الرقمية زي:الصحافةالإلكترونية – البودكاست – التصوير – الكتابة – إدارة المنصات – المونتاج – والقصص الرقمية. المبادرة بتساعد المشاركين يتعلموا استخدام الأدوات الرقمية بطريقة مبتكرة تخدم التنمية، وتفتح ليهم فرص حقيقية في سوق العمل—وكمان بتشجع على الإبداع داخل مراكز الشباب من خلال تدريب، مسابقات، وفعاليات تفاعلية.", registrationLink: "https://apps.emys.gov.eg/sport/forms_sys/public/emys_form/58", deadlineDate: "" },
+                    { title: "برنامج صُنّاع الأثر", description: "البرنامج من تنظيم مجلس الشؤون الإنسانية الدولية بالتعاون مع مركز الشباب العربي وأكاديمية الإعلام الجديد، وبيقدّم تدريب مكثّف لمدة 3 أسابيع، مع فرصة احتضان لمدة 6 شهور للمشاركين المتميزين. هتتعلّم خلال التدريب: أساسيات السرد القصصي الإنساني ـ كتابة السيناريوهات المؤثرة ـ مهارات التصوير والمونتاج ـ استخدام أدوات الذكاء الاصطناعي في صناعة المحتوى", registrationLink: "https://form.jotform.com/253082914904458" },
+                    { title: "برنامج التدريب الاحترافي في مجال ServiceNow", description: "يهدف البرنامج إلى تزويد المتدربين بخبرة نظرية وعملية على منصة ServiceNow، ويجمع بين أساسيات هندسة البرمجيات والتدريب العملي على تخصيص ServiceNow، والبرمجة النصية والتكامل والأتمتة", registrationLink: "https://tinyurl.com/yuk6jetn", deadlineDate: "" }
+                ],
+                international: [
+                    { title: "Yale Young Global Scholars (YYGS) ", description: "برنامج YYGS هو برنامج صيفي في جامعة ييل للطلاب المتفوقين حول العالم. يقدم البرنامج دورات أكاديمية متقدمة، وتجارب بحثية، وفرصة للقاء طلاب من جميع أنحاء العالم.", registrationLink: "https://apply.globalscholars.yale.edu/apply/?sr=396e3a1b-b883-43d7-bec2-887662f36919", deadlineDate: "7 يناير 2026" },
+                    { title: "Yale Young African Scholars (YYAS)", description: "YYAS هو برنامج صيفي مكثف لطلاب المدارس الثانوية في أفريقيا. يساعد الطلاب على تحسين مهاراتهم الأكاديمية، واستكشاف الخيارات الجامعية والمهنية، والتواصل مع القادة الشباب في جميع أنحاء أفريقيا.", registrationLink: "https://apply.globalscholars.yale.edu/apply/?sr=35fee83e-517b-40cb-999c-5976814b96d4", deadlineDate: "21 يناير 2026" },
+                    { title: "Girls Who Code", description: "تُقدِّم منظمة Girls Who Code برامج مجانية لتعليم الفتيات مهارات البرمجة والتكنولوجيا، مع فرص للتواصل مع خبراء المجال. البرامج مُصمَّمة خصيصًا لطالبات المدارس الثانوية، وتهدف إلى تمكينهن في مجال علوم الكمبيوتر.", registrationLink: "https://girlswhocodesm.smapply.io/", deadlineDate: "" },
+                    { title: "Tech Girls Program", description: "هو برنامج أمريكي مميز موجه للفتيات المهتمات بالتكنولوجيا والعلوم والهندسة والرياضيات (STEM)، وهدفه تمكين الفتيات الصغيرات من الشرق الأوسط وشمال إفريقيا في مجالات التقنية والقيادة.", registrationLink: "https://www.techgirls.org", deadlineDate: "" },
+                    { title: "Stanford Mathematics Camp (SUMAC)", description: "هو واحد من أقوى البرامج الصيفية في العالم لطلاب الثانوية المهتمين بالرياضيات المتقدمة والبحث العلمي.", registrationLink: "https://sumac.stanford.edu", deadlineDate: "" },
+                    { title: "Leadership in the Business World (LBW)", description: "هو برنامج صيفي مرموق تنظمه جامعة بنسلفانيا (UPenn)، وتحديدًا كلية وارتون (Wharton School)، واحدة من أفضل كليات إدارة الأعمال في العالم.", registrationLink: "https://globalyouth.wharton.upenn.edu/summer-high-school-programs/lbw", deadlineDate: "" },
+                    { title: "Notre Dame Leadership Seminars (NDLS)", description: "هو برنامج صيفي مجاني ومتميز تنظمه جامعة نوتردام (University of Notre Dame) في أمريكا، يهدف لتطوير مهارات القيادة والفكر النقدي لدى طلاب الثانوية المتفوقين من حول العالم.", registrationLink: "https://precollege.nd.edu/leadership-seminars", deadlineDate: "" },
+                    { title: "Program in Mathematics for Young Scientists (PROMYS)", description: "هو واحد من أعرق  البرامج الصيفية في العالم لطلاب الثانوية المهتمين بالرياضيات البحثية العميقة.", registrationLink: "https://promys.org", deadlineDate: "" },
+                    { title: "Lumiere Research Scholar Program", description: "هو برنامج بحثي دولي مميز لطلاب الثانوية يتيح لهم العمل على مشروعات بحث علمي فردية بإشراف باحثين من جامعات مرموقة مثل Harvard, Stanford, MIT وغيرهم.", registrationLink: " https://www.lumiere-education.com", deadlineDate: "" },
+                    { title: "Summer Science Program (SSP)", description: "هو برنامج صيفي دولي مكثف للطلاب الموهوبين في العلوم والرياضيات، ويركز على البحث العلمي الواقعي والتجارب العملية", registrationLink: "https://summerscience.org", deadlineDate: "" },
+                    
+                ]
+            },
+            competitions: {
+                local: [
+                    { title: "مسابقة المبدع الصغير", description: "مسابقة المبدع الصغير هي مبادرة وطنية تهدف لاكتشاف ودعم مواهب الأطفال والشباب في مجالات مثل الأدب، الفنون، العلوم والابتكار، حيث يقدّم المشاركون أعمالهم ليتم تقييمها من لجان متخصصة، وتختار المسابقة أفضل الإبداعات على مستوى الجمهورية، مما يمنح الطلاب فرصة للتعبير عن موهبتهم وتنميتها ويعزز ثقتهم بأنفسهم.", registrationLink: "https://www.ckp.eg/PrizeRequirements", deadlineDate: "31 ديسمبر 2025" },
+                    { title: "مسابقة Global Cyber Champion", description: "تهدف المسابقة إلى تمكين طلاب الجامعات والمتخصصين في مجال الأمن السيبراني وتأهيلهم لمواجهة الأخطار السيبرانية. وتتضمن جلسات تفاعلية وورش عمل وتحديات على المستويين الوطني والعالمي، بهدف رفع الوعي بالأمن السيبراني وتنمية المهارات التقنية للطلاب في جميع أنحاء الجمهورية.", registrationLink: "https://tinyurl.com/2c35rejh", deadlineDate: "" },
+                    { title: " مسابقة الرياضيات في كل مكان – الموسم الخامس | Mathematics Everywhere – Season 5", description: "تعلن أكاديمية البحث العلمي والتكنولوجيا عن الموسم الخامس من مسابقة الرياضيات في كل مكان لعام 2026 لطلاب المدارس حتى الصف الثاني عشر، احتفالًا باليوم العالمي للرياضيات. تشمل المسابقة مجالات مثل رحلة العلماء العرب في الرياضيات، الرياضيات التطبيقية، الإحصاء، الهندسة، الجبر، والموضوعات العامة", registrationLink: "", deadlineDate: "31 ديسمبر 2025" },
+                    { title: "مسابقة DIGITOPIA", description: "هي مبادرة وطنية تطلقها وزارة الاتصالات وتكنولوجيا المعلومات في مصر لاكتشاف ودعم المبدعين في المجالات الرقمية، وتستهدف طلاب المدارس والجامعات والخريجين حتى سن 35 عامًا، مع مسارات تشمل البرمجة والذكاء الاصطناعي والأمن السيبراني وتصميم الألعاب والفنون الرقمية. تهدف المسابقة إلى تنمية مهارات الابتكار وتحويل الأفكار إلى حلول رقمية تخدم المجتمع، وتتيح مراحل تدريب وتطوير للمشروعات، مع جوائز إجمالية تصل إلى 10 ملايين جنيه وفرص حقيقية للاحتضان والدعم الفني.", registrationLink: "https://digitopia.gov.eg/?utm_source=chatgpt.com", deadlineDate: "" },
+                    { title: "مسابقة المقال البيئي للشباب تحت شعار الهيدروجين الأخضر: طاقة المستقبل بين سطورك", description: "تطلق مؤسسة حماة الأرض بالتعاون مع وزارة الشباب والرياضة النسخة الثانية من مسابقة المقال البيئي للشباب تحت شعار الهيدروجين الأخضر: طاقة المستقبل بين سطورك، بهدف تشجيع فئة الشباب من 16 إلى 30 عامًا على التعبير عن رؤيتهم لدور الهيدروجين الأخضر في تحقيق الاستدامة، وبحث فرصه وتحدياته وتأثيره على الاقتصاد والمجتمع. يمكن المشاركة بمقال عربي أو إنجليزي لا يتجاوز 1000 كلمة، على أن يكون العمل أصليًا، وتُمنح جوائز مالية وشهادات تقدير للمراكز الثلاثة الأولى، مع نشر أفضل المقالات في كتيّب رقمي خاص.", registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSeK8YVCwI_AQUGNOo3lrt7JjShleDQu0F7HlysSlwj5HaHI3A/viewform?usp=dialog", deadlineDate: " 1 يناير 2026" },
+                    { title: "مسابقة رالي مصر لريادة الأعمال لموسم 2026.", description: " أعلن رالي مصر لريادة الأعمال عن فتح باب التقديم رسميًا لموسم 2026 — أكبر مسابقة جامعية في مصر لدعم الأفكار والمشروعات الناشئة.لو عندك فكرة مشروع، أو شغال على ستارت أب في مراحلها الأولى… فالمسابقة دي هي فرصتك إنك تبدأ صح وتاخد دعم حقيقي.", registrationLink: "https://forms.gle/f9dGmUGXaBePvKCH9", deadlineDate: "" },
+                    { title: "مسابقة مصر الرقمية 2025", description: "مسابقة مصر الرقمية بتدعو كل طلاب الجامعات والمبرمجين ورواد التكنولوجياإنهم يشاركوا في حل مشكلات حقيقية في مصر باستخدام التكنولوجيا.", registrationLink: "https://forms.gle/WZjM735r3Wr7jb85A", deadlineDate: "15/11/2025." },
+                    { title: "مسابقة المهارات الوطنية 2026 (National Skills Competition 2026)", description: "تهدف المسابقة إلى تشجيع الشباب المصري على الإبداع وتنمية المهارات التقنية والمهنية التي تواكب متطلبات سوق العمل المحلي والعالمي، من خلال منافسات وطنية تمهّد للمشاركة في المسابقة العالمية للمهارات (WorldSkills 2026).", registrationLink: " https://privatesector.moic.gov.eg/en/opportunities/835", deadlineDate: "" },
+
+                ],
+                international: [
+                    { title: "مسابقة آيسف (ISEF)", description: "هي أكبر معرض علمي دولي لطلاب المدارس من سن 13 إلى 18 عامًا، وتهدف إلى دعم الإبداع والبحث العلمي بين الشباب. يشارك الطلاب فيها عبر مشروعات مبتكرة في مجالات متعددة مثل البيئة والطاقة والهندسة والعلوم الحيوية. تبدأ المشاركة من المعارض المحلية في كل دولة، ثم يتأهل الفائزون لتمثيل بلادهم في المرحلة الدولية بالولايات المتحدة. توفر المسابقة فرصة لعرض الابتكارات أمام خبراء عالميين والحصول على جوائز مميزة ودعم أكاديمي، مما يجعلها منصة مهمة لاكتشاف علماء المستقبل.", registrationLink: "https://www.societyforscience.org/isef/?utm_source=chatgpt.com", deadlineDate: "" },
+                    { title: "Egypt International Science and Technology Fair (EISTF)", description: "هو معرض ومسابقة علمية دولية تُقام في مصر، ويشارك فيها طلاب المرحلة الثانوية والجامعات من خلال مشروعات بحثية أو ابتكارية في مجالات العلوم والهندسة. تهدف المسابقة إلى دعم الإبداع العلمي وتمكين الطلاب من عرض أفكارهم أمام لجان تحكيم متخصصة، مع توفير جوائز وفرص مميّزة للفائزين. تُعد EISTF منصة مهمة لتنمية مهارات البحث العلمي والتصميم الهندسي، وتمنح المشاركين فرصة لإبراز مشاريعهم على مستوى محلي ودولي.", registrationLink: "https://eistf.eg-ase.org/?utm_source=chatgpt.com", deadlineDate: "" },
+                    { title: "IYMC – International Youth Math Challenge ", description: "هي مسابقة رياضيات دولية أونلاين موجهة لطلاب المرحلة الثانوية والجامعية من جميع دول العالم، وتركز على التفكير المنطقي وحل المشكلات الرياضية العميقة بعيدًا عن الحفظ، وتتكون من عدة مراحل تبدأ بجولة تأهيلية ثم مراحل متقدمة، ويحصل المشاركون على شهادات رسمية مع جوائز للمتميزين. ", registrationLink: "https://iymc.info/", deadlineDate: "30 نوفمبر 2026" },
+                    { title: "NASA Space Apps Challenge", description: "هي هاكاثون دولي سنوي تنظمه ناسا، يتيح للطلاب والمبرمجين والمصممين والعلماء من جميع أنحاء العالم استخدام بيانات فضائية مفتوحة لحل تحديات واقعية على الأرض وفي الفضاء. يمكن المشاركة فردياً أو ضمن فريق", registrationLink: "https://www.spaceappschallenge.org/about/?utm_source=chatgpt.com", deadlineDate: "" },
+                    { title: "The Earth Prize", description: "هي مسابقة عالمية سنوية موجّهة للطلاب من 13 إلى 19 عامًا، وتهدف إلى تشجيع الشباب على ابتكار حلول قابلة للتطبيق لمشكلات البيئة والاستدامة. يشارك الطلاب بمشاريع أو أفكار مبتكرة تعالج قضايا مثل التلوث، الطاقة، المياه، المناخ، أو إدارة الموارد. توفر المسابقة برنامجًا تدريبيًا وإرشادًا من خبراء عالميين، وتمنح جوائز مالية كبيرة للفِرق الفائزة ومدارسهم، مما يجعلها منصة مهمة لدعم الجيل الجديد من المبدعين في مجال حماية البيئة.", registrationLink: "https://www.theearthprize.org/?utm_source=chatgpt.com", deadlineDate: "31 يناير 2026" },
+                    { title: "USACO – USA Computing Olympiad", description: "مسابقة أمريكية في البرمجة والذكاء الحاسوبي للطلاب، تعتمد على حل مشكلات برمجية بمستويات متدرجة من السهولة إلى الاحتراف، وتهدف لتطوير مهارات التفكير المنطقي والخوارزميات، والطلاب المتفوقون فيها يمكن أن يتأهلوا لفرق تدريبية متقدمة.", registrationLink: " https://usaco.org/ ", deadlineDate: "" },
+                    { title: "National Invention Convention", description: "برنامج ومسابقات تهدف لتشجيع الطلاب على الابتكار، حيث يبتكر المشاركون حلولًا أو نماذج أولية تعالج مشكلات حقيقية، ثم يعرضونها أمام محكّمين للحصول على جوائز وفرص للتطوير.", registrationLink: "https://inhub.thehenryford.org/icw/about/news/newsdetails/Detail/from-young-inventor-to-global-advocate--anneliese-gegenheimer-on-the-power-of-staying-connected", deadlineDate: "" },
+                    { title: "Conrad Challenge", description: "مسابقة عالمية للابتكار تهدف لجعل الطلاب يصممون مشاريع علمية وتكنولوجية قابلة للتنفيذ. يعمل المشاركون كفرق ويقدمون حلولًا مبتكرة في مجالات متنوعة مثل الطاقة والصحة والفضاء وريادة الأعمال.", registrationLink: "https://conrad.spacecenter.org/ ", deadlineDate: "" },
+                    { title: "Regeneron Science Talent Search", description: "مسابقة علمية مرموقة لطلاب المرحلة الثانوية في أمريكا، تعتمد على تقديم مشروع بحث علمي عالي المستوى، ثم المرور بمراحل تقييم قوية تشمل التقارير العلمية والمقابلات والعرض أمام لجان تحكيم.", registrationLink: "https://www.societyforscience.org/regeneron-sts/ ", deadlineDate: "" },
+                    { title: "DuPont Challenge Science Essay Competition", description: "مسابقة مقالات علمية تهدف لتعزيز مهارات الكتابة العلمية، حيث يكتب الطلاب مقالات قصيرة تشرح فكرة علمية أو تطبيق تكنولوجي بطريقة واضحة ودقيقة، ثم تُقيّم الأعمال بناءً على جودة المحتوى والبحث.", registrationLink: "https://usascholarships.com/the-dupont-challenge-science-essay-competition/", deadlineDate: "" },
+                  
+                ]
+            },
+            conferences: {
+                local: [
+                    { title: " SHE CAN – Women Entrepreneurship Event", description: "أكبر فعالية لتمكين روّاد/روّادات الأعمال (منظّمة من Entreprenelle)", registrationLink: "https://entreprenelle.com/", deadlineDate: "" },
+                    { title: "Egypt Innovation Week (أسبوع الابتكار المصري 2026)", description: "أسبوع كامل من ورش عمل، جلسات، مسابقات للمبتكرين وروّاد الأعمال", registrationLink: "https://egyptinnovationweek.com/2026 ", deadlineDate: "" },
+                    { title: "Techne Summit Egypt 2026", description: "مؤتمر ضخم في مصر يجمع آلاف الحضور، متحدثين، ومستثمرين من 70+ دولة، مع فرص تواصل وعروض مشاريع وشركات ناشئة.", registrationLink: "https://technesummit.com/?utm_source=chatgpt.com", deadlineDate: "" },
+                    { title: "Cairo ICT – معرض التكنولوجيا الأكبر في مصر", description: "واحد من أكبر وأهم فعاليات التكنولوجيا في مصر والشرق الأوسط وأفريقيا، ويُقام سنويًا في القاهرة تحت رعاية وزارة الاتصالات وتكنولوجيا المعلومات وبمشاركة واسعة من الوزارات والهيئات الحكومية والشركات الكبرى والناشئة.", registrationLink: "https://cairoict.com/?utm_source=chatgpt.com", deadlineDate: " 8–11 نوفمبر 2026" },
+                    { title: "TEDx في مصر 🇪🇬", description: "TEDx هي فعاليات محلية مستقلة مرخّصة من TED العالمية، هدفها مشاركة أفكار تستحق الانتشار من خلال خطابات قصيرة ملهمة في مجالات التكنولوجيا، التعليم، التصميم، المجتمع، الريادة وغيرها.", registrationLink: "https://www.ted.com/tedx", deadlineDate: "" },
+                    { title: "IEEE Egypt Conference (مؤتمرات IEEE الطلابية)", description: "هي فعاليات طلابية ومهنية تنظمها IEEE Egypt Section بالتعاون مع فروع الطلاب في الجامعات المصرية مثل Nile University، AAST، Cairo University، Ain Shams. تشمل الفعاليات مؤتمرات وورش عمل في الهندسة، الذكاء الاصطناعي، الأمن السيبراني، وبرمجة الروبوتات، إضافةً إلى مسابقات وعروض مشاريع طلابية. تهدف هذه الفعاليات إلى تطوير مهارات الطلاب التقنية وربطهم بالمجتمع المهني، كما توفر فرصًا للتواصل مع خبراء ومهندسين ومبتكرين محليًا وعالميًا.", registrationLink: "https://www.ieee.org/membership/ieee/volunteers/sections/egypt%E2%80%91section.html", deadlineDate: "" },
+                    { title: "ScienceFest Egypt – مهرجان العلوم المصري", description: "هو مهرجان علمي سنوي يركز على نشر الثقافة العلمية والابتكار بين الطلاب والشباب في مصر. يضم المعرض تجارب علمية تفاعلية، ورش عمل STEM، محاضرات وندوات علمية، ومسابقات للطلاب لتقديم أبحاثهم ومشاريعهم. يتيح المهرجان الفرصة للشباب للتعرف على أحدث التطورات العلمية والتكنولوجية، وتطبيق مفاهيم العلوم في أنشطة عملية، كما يشجع على التفكير الإبداعي والتجريبي في مختلف المجالات العلمية.", registrationLink: "https://sciencefestegypt.org/", deadlineDate: "" },
+                    { title: "TIEC Startup Events – فعاليات مركز الإبداع التكنولوجي (ITIDA)", description: "ينظم مركز الإبداع التكنولوجي (TIEC) التابع لـ ITIDA فعاليات لدعم الشباب ورواد الأعمال، مثل مسابقات عرض المشاريع (Startup Pitch)، وبرامج تمويل وتوجيه للشركات الناشئة، وورش عمل في الذكاء الاصطناعي والتقنيات الحديثة. تُقام هذه الفعاليات غالبًا في القرية الذكية – Smart Village بالقاهرة، وتجمع بين طلاب الجامعات، المستثمرين، والخبراء في مجال الابتكار والتكنولوجيا. الهدف هو تمكين الشباب المصري من إطلاق مشاريعهم وتحويل أفكارهم إلى منتجات حقيقية قابلة للسوق.", registrationLink: "https://tieccairo.com/", deadlineDate: "" },
+                    
+                ],
+                international: [
+                    { title: "CES – Consumer Electronics Show", description: " من أكبر معارض التكنولوجيا في العالم — تكنولوجيا استهلاكية، AI، روبوتات، أجهزة ذكية.", registrationLink: "https://www.ces.tech/", deadlineDate: "" },
+                    { title: "Web Summit", description: "مؤتمر ضخم يجمع روّاد أعمال، مستثمرين، شركات تقنية من كل أنحاء العالم.", registrationLink: "https://websummit.com/", deadlineDate: "" },
+                    { title: "TechCrunch Disrupt", description: "حدث مهم للشركات الناشئة — مسابقات Pitch، مستثمرين، جلسات تعليمية.", registrationLink: "https://techcrunch.com/events/disrupt/", deadlineDate: "" },
+                    { title: "SXSW (South by Southwest)", description: "يجمع بين التكنولوجيا، الموسيقى، الأفلام، Startups، Innovation", registrationLink: "https://sxsw.com/", deadlineDate: "" },
+                    { title: "Slush", description: "من أكبر تجمعات Startup في أوروبا — فرص استثمار، عروض مشاريع، AI، Tech.", registrationLink: "https://www.slush.org/", deadlineDate: "" },
+                    { title: " VivaTech", description: "مؤتمر ومعرض تكنولوجيا عالمي — تركيز على AI، Digital Transformation، Startups.", registrationLink: "https://vivatechnology.com/", deadlineDate: "" },
+                    { title: "Mobile World Congress (MWC) Barcelona", description: "أكبر معرض ومؤتمر عالمي في مجال الاتصالات والتقنيات المتنقلة، يشمل شبكات 5G/6G، AI، IoT، الواقع الممتد، والحلول الرقمية للبنية التحتية.", registrationLink: "https://www.mwcbarcelona.com/", deadlineDate: "" },
+                    { title: "Collision Conference", description: "مؤتمر سريع النمو يجمع روّاد أعمال، مستثمرين، شركات تقنية ناشئة ومتقدمة من مختلف القطاعات — AI، FinTech، EdTech، CleanTech وغيرها.", registrationLink: "https://collisionconf.com/", deadlineDate: "" },
+                    { title: "NVIDIA GTC (GPU Technology Conference)", description: "مؤتمر يهتم بالذكاء الاصطناعي، الحوسبة عالية الأداء، البيانات الكبيرة، التدريب على النماذج والتطبيقات الصناعية — مناسب للمهتمين بالـ AI المتقدم.", registrationLink: "https://www.nvidia.com/gtc/", deadlineDate: "" },
+                    { title: " Google I/O", description: "مؤتمر السنوي من Google للمطورين مع تحديثات Android وAI وCloud وWeb technologies — مناسب للمطورين والمبتكرين.", registrationLink: "https://io.google/" },
+                ]
+            },
+            training: {
+                local: [
+                    { title: "تدريب اونلاين مجانى للشباب", description: "منحة تدريب أونلاين مجانية في الوعي الرقمي، السلامة الرقمية، والأمن السيبراني متاحة من سن 15 عامًا، التدريب ذاتي حتى 28 ديسمبر ويمكن اختيار برنامجين فقط", registrationLink: " https://forms.office.com/r/Xbdzu4MR0g،", deadlineDate: " 11 ديسمبر" },
+                    { title: "تدريب وتوظيف لطلاب وخريجي إعلام جامعة القاهرة", description: "فرصة تدريب وتوظيف من Telegraph Egypt لطلاب وخريجي إعلام جامعة القاهرة لتطوير المهارات المهنية والانضمام لفريق ديناميكي مع فرصة للتوظيف بعد البرنامج", registrationLink: "https://bit.ly/4qXRG4t", deadlineDate: "" },
+                    { title: "برنامج تعلم الإيطالية مجانًا", description: "فرصة مجانية من صندوق تطوير التعليم لتعلم اللغة الإيطالية وتأهيل الشباب لسوق العمل الدولي عبر تدريب إلكتروني شامل للمهارات الأساسية والمصطلحات المهنية ومتاح من الإعدادية وحتى الخريجين.", registrationLink: "https://bit.ly/3XwhQOv", deadlineDate: "" },
+                    { title: "برنامج الدبلوماسية الشبابية", description: "برنامج من وزارة الشباب والرياضة لتأهيل الشباب المصري في الدبلوماسية الشبابية وبناء القدرات الدولية، مع فرص للمشاركة في الفعاليات المحلية والإقليمية والدولية وتنمية مهارات القيادة والتمثيل الشبابي.", registrationLink: "https://eydp.emys.gov.eg/", deadlineDate: "" },
+                    { title: "هاكثون الشباب للذكاء الاصطناعي", description: "مسار تدريب مجاني في الذكاء الاصطناعي من وزارة الشباب والرياضة ومايكروسوفت لمدة ٨ أيام يتضمن تعلم أدوات الـAI وتنفيذ مشروع عملي مع فرصة للمشاركة في مسابقة وشهادة حضور للمشتركين.", registrationLink: "https://forms.office.com/r/ZHcCjpk3Ei", deadlineDate: "" },
+                    { title: "برنامج اختراق سوق العمل 2025", description: "برنامج مجاني بيوفّر تدريب عملي وورش تفاعلية ومقابلات توظيف لخريجي 2023–2025، وبيساعدك تبني مسار مهني واضح بدعم مدربين وخبراء في أهم مجالات سوق العمل، مع فرص مشاركة في أكبر ملتقى توظيفي بالصعيد", registrationLink: "https://shorturl.at/fY8fV", deadlineDate: "" },
+                    { title: "كورسات الإنجليزية المجانية أونلاين بالجامعة الأمريكية 2025", description: "لتسجيل في كورسات الإنجليزية أونلاين بالجامعة الأمريكية بالقاهرة متاح الآن للمبتدئين A1 حتى C1 مدة كل مستوى 4 إلى 6 أسابيع مجانية بتمويل الجامعة مع ترجمة أثناء الدراسة واختبارات بعد كل موديل وبعد إتمام 4 دورات زيارة حرم الجامعة بالقاهرة الجديدة اختبار تحديد مستوى 90 دقيقة لتحديد المستوى المناسب", registrationLink: "https://learn-too-earn.blogspot.com/2025/06/blog-post_17.html", deadlineDate: "" },
+                    { title: "تعلم البرمجة بلغة ++c", description: "شرح كامل باللغة العربية من الصفر حتى مفاهيم البرمجة الأساسية والبرمجة الكائنية OOP وإدارة الذاكرة وبناء برامج بسيطة، مع شهادة معتمدة بعد إتمام الدورة", registrationLink: "https://www.m3aarf.com/certificate/36/%D8%A7%D9%84%D8%A8%D8%B1%D9%85%D8%AC%D8%A9-%D8%A8%D9%84%D8%BA%D8%A9-C-Plus-Plus-video#google_vignette", deadlineDate: "" },
+                    { title: "كورس البرمجة للمبتدئين", description: "قناة تعليمية عربية على يوتيوب، تشرح أساسيات البرمجة للمبتدئين تمامًا، تشمل منطق البرمجة، المتغيرات، الجمل الشرطية، الحلقات، الدوال، والمشاريع البسيطة، الشرح منظم ومبسط لتسهيل الفهم بدون الحاجة لأي خبرة سابقة.", registrationLink: "https://www.youtube.com/@CodezillaAR", deadlineDate: "" },
+                    { title: "كورس Word للمبتدئين", description: "قائمة تشغيل على يوتيوب تشرح أساسيات برنامج Microsoft Word من الصفر، تشمل واجهة البرنامج، الكتابة، التنسيق، الجداول، الإضافات، وحفظ الملفات. الشرح بالعربي ومناسب تمامًا للمبتدئين", registrationLink: "https://youtube.com/playlist?list=PL2-aDwsKPbyI21HgB23iW0N6cqqftHO9F&si=L30-EX-PXCaqrjPD", deadlineDate: "" },
+                    
+                ],
+                international: [
+                    { title: "The Junior Academy", description: "برنامج دولي مجاني من The New York Academy of Sciences لتطوير مهارات البحث العلمي والتفكير النقدي والعمل الجماعي في فرق عالمية لطلاب 13–19 سنة عبر تدريب أونلاين لمدة 10 أسابيع مع شهادة دولية وعضوية مجانية لمدة عام.", registrationLink: "https://gsa.smapply.io/prog/student_programs_/", deadlineDate: "" },
+                    { title: "NGO Whisperer Fellowship", description: "برنامج قيادي عالمي مجاني لمدة 7 شهور يهدف لتطوير قادة المنظمات غير الربحية والمشروعات الاجتماعية عبر تدريب احترافي وإرشاد فردي وشبكة علاقات دولية، مع فرص للمشاركة في القمة العالمية للـ NGO Whisperer وعضوية دائمة لشبكة الخريجين.", registrationLink: "https://docs.google.com/forms/d/e/1FAIpQLSe5SFsvNJOsWrWD8EhBSLE6sIh6fcWghz3XSjsUCKMAZ7yJJw/viewform", deadlineDate: "" },
+                    { title: "قمة شباب الشرق الأوسط – مكة 2026", description: "فرصة دولية للشباب المسلمين للمشاركة في برنامج قيادي مُكثّف يشمل ورش مهنية، جلسات ثقافية وإيمانية، بناء شبكة علاقات دولية، وأداء العمرة، مع توفير السكن والوجبات والدعم الجزئي أو الكامل. البرنامج متاح لمن سنّهم بين 15 و40 عامًا من مختلف الدول، دون الحاجة لشهادات لغة.", registrationLink: "https://careers.msqfon.com/?p=5559", deadlineDate: "" },
+                    { title: " تدريب مايكروسوفت المجانية العالمية 2025", description: "ورات مايكروسوفت المجانية 2025 تمويل مجانية مع شهادة برسوم رمزية دراسة أونلاين 100% للأعمار والجنسيات والطلاب والخريجين والمهنيين مجالات Microsoft 365 Power BI إدارة مشاريع الذكاء الاصطناعي محلل أعمال Copilot للتسويق تطوير ويب UX تصميم أوفيس 365 دايناميكس 365 SQL Server فيجوال ستوديو Azure مميزات شهادة رسمية بدون شروط تفتح فرص عمل", registrationLink: "https://www.coursera.org/courses?query=microsoft", deadlineDate: "" },
+                    { title: "تعلم الإنجليزية مجانًا من مصادر أكسفورد الرسمية", description: "فرصة لتعلم اللغة الإنجليزية مجانًا عبر منصات تابعة لجامعة أكسفورد ومؤسسات تعليمية معتمدة، بمحتوى منظم من المستوى A1 إلى C2 يمكن البدء فيه فورًا دون أي رسوم، مع إمكانية شهادة مدفوعة اختيارية. يشمل المحتوى قواعد ونطق وتحدث واستماع ومواد تفاعلية تدعم التطور اللغوي من مصادر عالمية موثوقة.", registrationLink: "oxfordonlineenglish.com", deadlineDate: "" },
+                    { title: "Harvard – The Architectural Imagination", description: "كورس مجاني من جامعة هارفارد عبر منصة edX من أهم البرامج اللي بتقدّم مدخل حقيقي لفهم العمارة كفن وثقافة وتكنولوجيا.", registrationLink: "https://www.edx.org/learn/architecture/harvard-university-the-architectural-imagination", deadlineDate: "" },
+                    { title: "Technovation Girls", description: "رنامج عالمي بيدعم البنات من سن 8 إلى 18 سنة لتطوير حلول تكنولوجية لمشكلات المجتمع من خلال تصميم وبناء تطبيق موبايل كامل، والعمل على خطة عمل وتقديم مشروع متكامل للمسابقة الدولية", registrationLink: "https://my.technovationchallenge.org/signin#/", deadlineDate: "" },
+                    { title: "برنامج FGS الصيفي للبحث العلمي", description: "برنامج عالمي أونلاين لطلاب الثانوية من 15 إلى 18 سنة، يركز على تنمية مهارات البحث العلمي عبر مشاريع علمية متقدمة بإشراف باحثين دوليين. يشمل ورش وتطبيقات عملية في الفيزياء والكيمياء وعلوم الحياة والرياضيات. يشترط شغف بالعلوم ومستوى أكاديمي ممتاز. التقديم يبدأ عادة في الربيع.", registrationLink: "https://sites.google.com/thefgs.org/fgs", deadlineDate: "" },
+                    { title: "MedSTEMPowered", description: "مبادرة مجانية يقودها طلاب، موجّهة لطلاب الثانوية وبداية الجامعة المهتمين بالطب وعلوم STEM. يقدّم ورش متقدمة، وتجارب ظلّ افتراضي مع متخصصين، وفرص مشاركة في مبادرات صحية عالمية، إضافة إلى شهادات مميزة للطلاب الملتزمين", registrationLink: "https://medstempowered.org", deadlineDate: "" },
+                    { title: "Chinese for Beginners", description: "برنامج تعليمي مجاني مقدم من واحدة من أبرز الجامعات في الصين، يهدف لتعليم أساسيات اللغة الصينية للمتعلمين المبتدئين بشكل مبسّط وتدريجي. يغطي الكورس أساسيات النطق، المفرادات اليومية، الجمل الأساسية، والمهارات المطلوبة لبناء حوار بسيط بالصينية. يتميز بشرح مرئي واضح وتمارين تفاعلية تساعد على ترسيخ القواعد والنطق الصحيح", registrationLink: "https://www.coursera.org/learn/learn-chinese", deadlineDate: "" },
+                ]
+            },
+            grants: {
+                local: [
+                    { title: "منحة Train to Hire", description: "تُقدَّم منحة Train to Hire من معهد Komet بالتعاون مع هيئة تنمية صناعة تكنولوجيا المعلومات ITIDA بوزارة الاتصالات كمنحة دراسية مجانية بالكامل لتعلّم اللغة الألمانية بهدف تأهيل المتقدمين لسوق العمل ودعمهم حتى الحصول على أول فرصة وظيفية مناسبة.", registrationLink: "https://forms.gle/kGdLsZLqKMdqLmq89 ", deadlineDate: "" },
+                    { title: "منحة التدريب المهنى للشباب", description: " منحة تدريبية من وزارة الشباب والرياضة ووزارة العمل بالتعاون مع IOM Egypt وTaheal في تخصصي التسويق الرقمي والذكاء الاصطناعي، مع إتاحة دورة تمهيدية في الثقافة الرقمية لمن لا يجتاز المتطلبات ويُقبل المتقدمون من 18 إلى 35 عامًا المقيمون في القاهرة أو الإسكندرية مع الالتزام الكامل بالحضور لمدة 8 أيام، وفي نهاية البرنامج يحصل المشاركون على تدريب إضافي في مهارات التوظيف ", registrationLink: "https://forms.gle/wi9YtQbdn8qyjbwL8", deadlineDate: "" },
+                    { title: "منحة التميز الرياضي", description: "منح دراسية ورياضية للرياضيين المتميزين تقدمها وزارة الشباب والرياضة.", registrationLink: "https://sports.gov.eg/sports-scholarship", deadlineDate: "25 نوفمبر 2023" },
+                    { title: "منحة ذوي الهمم", description: "منح دراسية وتدريبية خاصة بذوي الهمم تقدمها المجلس القومي للأشخاص ذوي الإعاقة.", registrationLink: "https://ncpd.gov.eg/disability-grant", deadlineDate: "8 ديسمبر 2023" },
+                    { title: " ASPIRE Egypt", description: "منحة ASPIRE Egypt من STDF بتمويل 3–8 مليون جنيه لدعم الأبحاث التطبيقية في الطاقة والذكاء الاصطناعي والمياه والصحة والزراعة والبيئة", registrationLink: "https://stdf.eg/web/grants/open", deadlineDate: "8 ديسمبر 2025" },
+                    { title: "منحة سفراء العمل للشباب المصري 2025", description: "منحة سفراء العمل هي فرصة تدريبية مميزة برعاية وزارة العمل، تستهدف 50 شاب وفتاة لتأهيلهم في مجالات العمل اللائق، السلامة المهنية، والذكاء الاصطناعي، مع مشاركات ميدانية داخل الوزارة واكتساب خبرات عملية وشهادات رسمية وفرص متقدمة للمتميزين", registrationLink: "https://forms.gle/HEvEvqCTX87Dw5Jr7", deadlineDate: "" },
+                    { title: "فرصة كن رائد أعمال مبدع للشباب 2025", description: "مبادرة كن رائد أعمال مبدع من وزارة الشباب والرياضة تمنح الشباب تدريبًا متخصصًا لتحويل الأفكار الريادية إلى مشاريع حقيقية، مع دعم كامل، تقييم من خبراء، وفرص للتشبيك والتمويل ضمن برنامج تنافسي موجّه للمبدعين من 21 إلى 35 سنة", registrationLink: "https://forms.gle/FoA8hnaLwdiKZjJX8", deadlineDate: "" },
+                    { title: "منحة معهد البحر الأحمر لليخوت 2025", description: "احصل على شهادة ريس بحري في الجونة مع تغطية الإقامة والمعيشة والرعاية الطبية واللياقة والزي الدراسي", registrationLink: "https://rsyinstitute.com/ar/scholarship/", deadlineDate: "" },
+                    { title: "منحة وزارة الشباب لتدريب الشباب في إدارة الموارد البشرية", description: "فرصة لتعلم أساسيات الموارد البشرية والتوظيف والمقابلات والتخطيط الوظيفي للشباب حتى 30 عامًا بمؤهل جامعي", registrationLink: "https://forms.gle/CtcDnZonXnKVh6ZV7", deadlineDate: "" },
+                    { title: "منحة شباب مصر الرقمية – الجاهز للتوظيف", description: "فرصة تدريب مجانية في مجالات الشبكات، الأمن السيبراني، البرمجة، والهندسة، مع تدريب عملي وفرص توظيف للشباب خريجي آخر 5 سنوات.", registrationLink: "https://nti.sci.eg/dey/HireReady.html", deadlineDate: "" },
+                    { title: "منحة جامعة النيل الأهلية للمعيدين والماجستير", description: "فرصة لخريجي الهندسة بمعدل GPA>3.6 للعمل معيدين في مواد الرياضيات والفيزياء الهندسية، مع تمويل كامل لدراسة الماجستير داخل الجامعة.", registrationLink: " https://www.nu.edu.eg/careers/teaching-assistant-school-engineering-and-applied-sciences", deadlineDate: "" },
+                    { title: "منحة تدريبية مميزة في ServiceNow", description: "فرصة 4 أشهر لخريجي 2021-2025 لتعلم هندسة البرمجيات وتخصيص ServiceNow، مع إمكانية التوظيف بعد انتهاء البرنامج.", registrationLink: "https://tinyurl.com/yuk6jetn", deadlineDate: "" },
+                    
+                    ],
+                international: [
+                    { title: "Middle East Youth Summit 2026 – مكة", description: "فرصة دولية للشباب المسلمين لحضور قمة MEYS 2026 في مكة من 30 مارس إلى 1 أبريل، بمشاركة خبراء وشباب من أكثر من 30 دولة. يشمل البرنامج ورش قيادية، جلسات ثقافية وإيمانية، أداء العمرة، وزيارات لمعالم إسلامية، بالإضافة إلى شهادات وفرص تمويل جزئي وكامل", registrationLink: "https://middleeastyouthsummit.com/", deadlineDate: "15 يناير" },
+                    { title: " Chinese Government Scholarship CSC", description: "توفر تمويلًا كاملاً يشمل الرسوم الدراسية، راتبًا شهريًا، سكنًا جامعيًا وتأمينًا طبيًا، وهي متاحة لطلاب البكالوريوس والماجستير والدكتوراه من مختلف الدول", registrationLink: "https://www.bngoh.com/2025/11/china-government-scholarshi-csc.html", deadlineDate: "" },
+                    { title: "منحة كوريا الجنوبية GKS 2026", description: "منحة حكومية مقدمة من Global Korea Scholarship لدراسة البكالوريوس بتمويل كامل، تشمل الرسوم، السكن، والتأمين، مع تقديم إلكتروني عبر Study in Korea خلال 15–30 سبتمبر 2025. عدد المقاعد محدود جدًا واختيار الجامعات يتم حسب المسار المخصص", registrationLink: "https://www.mofa.go.kr/kh-en/brd/m_25856/view.do?seq=66&utm_source=chatgpt.com", deadlineDate: "" },
+                    { title: "Tomorrow’s Leaders", description: "فرصة لطلاب الثانوية 2025 من مصر والدول العربية للانضمام للجامعات الأمريكية بالقاهرة وبيروت ولبنان، ممولة بالكامل وتشمل الرسوم والسكن والمصروفات والتأمين والكتب واللابتوب وتذاكر السفر وفصل في أمريكا، مع شرط التفوق الأكاديمي والنشاط القيادي", registrationLink: "www.TomorrowsLeadersProgram.org", deadlineDate: "25 نوفمبر 2025" },
+                    { title: "Eiffel Excellence Scholarship 2026", description: "فرصة للطلاب الدوليين المتميزين لدراسة البكالوريوس، الماجستير أو الدكتوراه في أفضل الجامعات الفرنسية، وتشمل المنحة الرسوم الدراسية كاملة، مصروف شهري، تذاكر سفر، سكن، تأمين صحي، ودعم أكاديمي، ممولة من وزارة أوروبا والشؤون الخارجية الفرنسية", registrationLink: "https://fullyscholarships.com/eiffel-excellence-scholarship-2026-in-france/", deadlineDate: "" },
+                    { title: "Doha Institute for Graduate Studies 2026", description: "فرصة للطلاب الدوليين لدراسة الماجستير أو الدكتوراه في معهد الدوحة، وتشمل المنحة الرسوم الدراسية كاملة، مصروف شهري، تذاكر سفر، سكن مجاني، وتأمين صحي", registrationLink: "https://fullyscholarships.com/doha-institute-for-graduate-studies-scholarship-2026/", deadlineDate: "" },
+                    { title: "Jönköping University 2026", description: "متاحة لدراسة البكالوريوس والماجستير لجميع الجنسيات، وتشمل المنحة خصم 30٪ من الرسوم الدراسية", registrationLink: "https://brightscholarship.com/jonkoping-university-scholarships-2026/", deadlineDate: "2 مايو 2026" },
+                    { title: "منح الدراسة في اليابان 2025", description: "متاحة لجميع الجنسيات لدراسة البكالوريوس، الماجستير، والدكتوراه في الجامعات اليابانية، ممولة بالكامل", registrationLink: "https://brightscholarship.com/scholarships-in-japan-without-ielts-2025/", deadlineDate: "" },
+                    { title: "Heidelberg University 2025", description: "متاحة لجميع الجنسيات لدراسة البكالوريوس، الماجستير، والدكتوراه في جامعة هايدلبرغ، ممولة بالكامل", registrationLink: "https://brightscholarship.com/heidelberg-university-scholarship-2025/", deadlineDate: "" },
+                    { title: " Summer Undergraduate Research 2026", description: "8 أسابيع لطلاب Biology & Medicine، يشمل بحث في مختبر عالمي، إقامة، سفر، منحة، ودعم فيزا", registrationLink: "https://courses.unil.ch/cours/fbm", deadlineDate: "31 ديسمبر 2025" },
+                    { title: "مبادرة التحالفات العربية للبحث العلمي والابتكار ARICA ", description: "فرصة للباحثين المصريين والعرب لتمويل مشاريع بحثية مشتركة في مجالات الزراعة والغذاء والبيئة، الطاقة والمياه، الصحة والدواء، التكنولوجيا المتقدمة، والعلوم الاجتماعية والإنسانية، ضمن دعم أكاديمية البحث العلمي والتكنولوجيا واتحاد مجالس البحث العلمي العربية.", registrationLink: "https://arica.fasrc.org/ar/project_submission/", deadlineDate: "30 ديسمبر 2025" },
+                ]
+            },
+            volunteering: {
+                local: [
+                    { title: "فرصة تطوع مع الهلال الأحمر المصري", description: "نضم للشباب في برامج الهلال الأحمر للتدريب على الإسعافات الأولية والعمل الإنساني والمجتمعي، واكتساب خبرة عملية وشهادات معتمدة", registrationLink: "https://egyptianrc.org/en/volunteer", deadlineDate: "" },
+                    { title: "تطوع مع جمعية رسالة", description: "انضم لبرامج جمعية رسالة للتطوع في رعاية الأيتام، قوافل مساعدات، تعليم الأطفال، والتبرع بالدم، واكتسب خبرة عملية ومهارات اجتماعية.", registrationLink: "https://www.resala.org/public/index.php/volunteering", deadlineDate: "" },
+                    { title: "تطوع مع مستشفى 57357", description: "انضم لفريق المتطوعين وشارك في دعم الأطفال المرضى من خلال أنشطة متنوعة مثل الأعمال الإدارية، الدعم النفسي للأسر، الورش الفنية، المسرح، الاحتفال بأعياد الميلاد، الكورال، التزيين، تحقيق الأمنيات، والرحلات الترفيهية.", registrationLink: "https://www.57357.org/volunteers", deadlineDate: "" },
+                    { title: "منصة متطوعين مصر – وزارة الشباب والرياضة", description: "فرصة تطوع أونلاين في مجالات متعددة مثل التوعية، النشر، التصميم، مع شهادة معتمدة من الوزارة", registrationLink: "https://egyouth.com/ar/register", deadlineDate: "" },
+                    { title: "مؤسسة شباب القادة – YLF", description: "فرص تطوع أونلاين في السوشيال ميديا، دعم وتنظيم الفعاليات الشبابية مع شهادات إلكترونية", registrationLink: "https://www.facebook.com/YLF.official", deadlineDate: "" },
+                    { title: "فرصة تطوع في برنامج شباب يدير شباب – YLY", description: "انضم لبرنامج حكومي لتطوير مهاراتك القيادية والمشاركة في تنظيم الفعاليات والمبادرات المجتمعية للشباب من 16 إلى 30 سنة", registrationLink: "https://www.facebook.com/YLYOfficial", deadlineDate: "" },
+                    { title: " تطوع مع Resala STEM Helpers – الموسم 3", description: "انضم لفريق متطوعي STEM وساعد في خلق محتوى تعليمي ودعم الطلاب في مجالات مثل التسويق، الإعلام الاجتماعي، التصميم، البحث، وإدارة الفعاليات", registrationLink: "https://forms.gle/2NxJv1NmtmESWYBX9", deadlineDate: "" },
+                    { title: "مؤسسة حياة كريمة", description: "انضم لمؤسسة خيرية تعمل على دعم حقوق المواطنين المصريين والحفاظ على كرامتهم، والمشاركة في برامج تنموية في مختلف المحافظات", registrationLink: "https://www.hayakarima.com/andm-lna/apply/6", deadlineDate: "" },
+                    { title: "مؤسسة البنك الطعام المصري", description: "شارك في توفير الغذاء ودعم الأسر المحتاجة من خلال أنشطة تطوعية متنوعة في مختلف محافظات مصر (عمر التطوع 18 عام فأكثر)", registrationLink: "https://www.foodbankegypt.org/", deadlineDate: "" },
+                    { title: "التطوع بمكتبة الإسكندرية", description: "فرصة تطوع للشباب تضم برنامجًا تدريبيًا مكثفًا لمدة شهر (4 – 29 يناير 2026) للتعرف على مهام الخدمات المرجعية وتنمية المهارات الشخصية المطلوبة لسوق العمل، يليها التطوع الفعلي لمدة ثلاثة أشهر حتى 30 إبريل 2026، ما يتيح اكتساب خبرة عملية ومحاكاة بيئة العمل والإسهام في خدمة البحث العلمي وتنمية المجتمع، مع الحصول على شهادة مشاركة وخطاب شكر تقديرًا للجهود المبذولة", registrationLink: "https://forms.gle/DkPDT9VuPmR4pEiy6", deadlineDate: "" },
+                    { title: "صناع الحياة", description: "شارك في أنشطة تنموية وخيرية لمحاربة الفقر ودعم المجتمع المحلي، متاح في العديد من المحافظات", registrationLink: "https://lifemakers.org", deadlineDate: "" },
+                ],
+                
+                international: [
+                    { title: "فرصة تطوع أوروبية ممولة بالكامل للشباب", description: "فرصة تطوع ممولة بالكامل من الاتحاد الأوروبي عبر برنامج Youth Solidarity Corps للشباب 18–30 سنة، تشمل السفر والتأمين والتدريب وشهادة رسمية", registrationLink: "https://youth.europa.eu/solidarity_en", deadlineDate: "" },
+                    { title: "منصة متطوعي الأمم المتحدة – UNV Online", description: "تطوع أونلاين في الترجمة، الكتابة، التصميم، البحث، مع شهادة معتمدة من الأمم المتحدة", registrationLink: "https://www.onlinevolunteering.org/en", deadlineDate: "" },
+                    { title: "Translators Without Borders", description: "تطوع في ترجمة النصوص للمجتمعات المحتاجة مع شهادة دولية", registrationLink: "https://translatorswithoutborders.org/volunteer", deadlineDate: "" },
+                    { title: "AIESEC – Global Volunteer", description: "رنامج تطوع دولي قصير المدة يتراوح بين 6 و8 أسابيع، ويتيح المشاركة في مشروعات مجتمعية وتعليمية وثقافية في عدد كبير من الدول. يوفر البرنامج عادةً الإقامة، بينما يتحمّل المتطوع تكاليف السفر. لا يشترط خبرة مسبقة، مما يجعله مناسبًا لطلاب الجامعات وحديثي التخرج", registrationLink: "https://aiesec.org", deadlineDate: "" },
+                    { title: "African Union Youth Volunteer Corps (AU-YVC)", description: "برنامج تطوعي رسمي تحت مظلة الاتحاد الإفريقي، مخصص للشباب من 18 إلى 35 عامًا، ويستمر من ستة أشهر إلى عام كامل. يوفر فرص عمل تنموي في قطاعات مثل التعليم، والصحة، والتنمية المستدامة، وبناء السلام. البرنامج ممول بالكامل بما يشمل تذاكر الطيران، والإقامة، والتأمين، وبدلًا شهريًا. يتم فتح باب التقديم مرة سنويًا", registrationLink: "https://au.int/en/ayv", deadlineDate: "" },
+                    { title: "Global Shapers Community", description: "مبادرة عالمية تابعة للمنتدى الاقتصادي العالمي تضم شبكات شبابية في مختلف الدول. العضوية تتيح المشاركة في مشروعات اجتماعية محلية، إضافة إلى فرص تمثيل دولي وحضور فعاليات عالمية. يتم الانضمام عبر التقديم على الهَبّات المحلية داخل كل دولة", registrationLink: "https://www.globalshapers.org", deadlineDate: "" },
+                    { title: "European Solidarity Corps – رومانيا (Sighișoara)", description: "فرصة تطوع دولية ممولة بالكامل ضمن برنامج فيلق التضامن الأوروبي، مخصصة للشباب من مختلف الدول. تشمل المشاريع أنشطة مجتمعية وثقافية، مع تمويل كامل يغطي تكاليف السفر، الإقامة، التأمين، ومصروف شهري", registrationLink: "https://youth.europa.eu/solidarity/opportunity/49037_en", deadlineDate: "15 يوليو 2026" },
+                    { title: "Youth Bridges – النمسا (فيينا)", description: "مشاريع تطوع ممولة بالكامل ضمن منظمة Youth Bridges Budapest، تشمل دعم ذوي الاحتياجات، الأنشطة الشبابية، والتواصل المجتمعي. مدة التطوع من مايو 2026 حتى مارس 2027، ويشمل التمويل السفر، الإقامة، والتدريب الميداني", registrationLink: "https://www.youthbridgesbudapest.org/projects_1/volunteering/upcoming-volunteer-projects", deadlineDate: "" },
+                    { title: "European Solidarity Corps ", description: "برنامج تطوع طويل المدى لمدة 6 أشهر، يشمل العمل مع الأطفال والمجتمع المحلي ضمن مدرسة ديمقراطية. التمويل كامل ويشمل السفر، الإقامة، التأمين، وبدل شهري. مدة المشروع من أبريل حتى أكتوبر 2026 ", registrationLink: "https://youth.europa.eu/solidarity/opportunity/49006_en", deadlineDate: "" },
+                    { title: "European Solidarity Corps – فرنسا", description: "فرص تطوع دولية ضمن برنامج ESC في مجالات الدعم الاجتماعي، الثقافة، البيئة، والمجتمع المحلي. التمويل يشمل تكاليف السفر، الإقامة، التأمين، وبدل شهري، ومتاحة للشباب العربي", registrationLink: "https://link-go.link/2025/10/13/france-volontaires", deadlineDate: "" },
+                ]
+            }
+        };
+
+        // تاريخ التنقل بين الصفحات
+        let navigationHistory = ['home-page'];
+        let currentCategory = '';
+        let currentOpportunityType = '';
+
+        // تهيئة الصفحة عند التحميل
+        document.addEventListener('DOMContentLoaded', function() {
+            // تعبئة الفئات الرئيسية
+            const mainCategoriesContainer = document.getElementById('main-categories');
+            
+            categories.forEach(category => {
+                const categoryCard = document.createElement('div');
+                categoryCard.className = 'category-card';
+                categoryCard.setAttribute('data-category', category.id);
+                
+                categoryCard.innerHTML = `
+                    <div class="category-header">
+                        <i class="${category.icon}"></i>
+                        <h3>${category.title}</h3>
+                    </div>
+                    <div class="category-description">
+                        <p>${category.description}</p>
+                    </div>
+                `;
+                
+                categoryCard.addEventListener('click', function() {
+                    currentCategory = category.id;
+                    document.getElementById('category-title').textContent = category.title;
+                    showPage('category-page');
+                });
+                
+                mainCategoriesContainer.appendChild(categoryCard);
+            });
+            
+            // إعداد محرك البحث
+            document.getElementById('search-btn').addEventListener('click', performSearch);
+            document.getElementById('search-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') performSearch();
+            });
+            
+            // إعداد بطاقات المحلي والدولي
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    currentOpportunityType = this.getAttribute('data-type');
+                    const typeName = currentOpportunityType === 'local' ? 'المحلية' : 'الدولية';
+                    document.getElementById('opportunities-title').textContent = 
+                        `الفرص ${typeName} - ${document.getElementById('category-title').textContent}`;
+                    
+                    // تحميل الفرص المناسبة للفئة والنوع
+                    loadOpportunities(currentCategory, currentOpportunityType);
+                    showPage('opportunities-page');
+                });
+            });
+            
+            // تحميل بعض الفرص افتراضياً
+            loadOpportunities('programs', 'local');
+        });
+
+        // وظيفة تحميل الفرص
+        function loadOpportunities(category, type) {
+            const opportunitiesList = document.getElementById('opportunities-list');
+            opportunitiesList.innerHTML = '';
+            
+            // الحصول على البيانات المناسبة
+            let opportunities = [];
+            
+            if (opportunitiesData[category] && opportunitiesData[category][type]) {
+                opportunities = opportunitiesData[category][type];
+            } else {
+                // بيانات افتراضية في حالة عدم وجود بيانات محددة
+                for (let i = 1; i <= 10; i++) {
+                    opportunities.push({
+                        title: `فرصة ${i} في ${category} - ${type}`,
+                        description: `وصف مفصل لفرصة ${i} في فئة ${category} من النوع ${type}. هذه فرصة رائعة للشباب المصري للمشاركة والاستفادة.`,
+                        registrationLink: "#",
+                        deadlineDate: "31 ديسمبر 2023"
+                    });
+                }
+            }
+            
+            // عرض الفرص
+            opportunities.forEach((opportunity, index) => {
+                const opportunityCard = document.createElement('div');
+                opportunityCard.className = 'opportunity-card';
+                opportunityCard.setAttribute('data-index', index);
+                
+                opportunityCard.innerHTML = `
+                    <div class="opportunity-header">
+                        <div class="opportunity-title">${opportunity.title}</div>
+                        <div class="opportunity-type">${type === 'local' ? 'محلي' : 'دولي'}</div>
+                    </div>
+                    <div class="opportunity-body">
+                        <p>${opportunity.description}</p>
+                    </div>
+                    <div class="opportunity-footer">
+                        <a href="${opportunity.registrationLink}" class="register-btn" target="_blank">
+                            <i class="fas fa-user-plus"></i> سجل الآن
+                        </a>
+                        <p style="margin-top: 1rem; font-size: 0.9rem; color: #777;">
+                            <i class="fas fa-clock"></i> آخر موعد للتسجيل: ${opportunity.deadlineDate}
+                        </p>
+                    </div>
+                `;
+                
+                // إضافة حدث النقر لتوسيع البطاقة
+                opportunityCard.addEventListener('click', function(e) {
+                    // منع تنفيذ الحدث إذا كان النقر على زر التسجيل
+                    if (e.target.closest('.register-btn')) return;
+                    
+                    // إغلاق جميع البطاقات الموسعة الأخرى
+                    document.querySelectorAll('.opportunity-card.expanded').forEach(card => {
+                        if (card !== this) card.classList.remove('expanded');
+                    });
+                    
+                    // توسيع/طي البطاقة المنقورة
+                    this.classList.toggle('expanded');
+                });
+                
+                opportunitiesList.appendChild(opportunityCard);
+            });
+        }
+
+        // وظيفة البحث
+        function performSearch() {
+            const searchTerm = document.getElementById('search-input').value.trim().toLowerCase();
+            
+            if (searchTerm === '') {
+                alert('يرجى إدخال مصطلح البحث');
+                return;
+            }
+            
+            alert(`سيتم تنفيذ البحث عن: "${searchTerm}" - هذه الميزة قيد التطوير`);
+            // في التطبيق الحقيقي، هنا سيتم البحث في قاعدة البيانات وعرض النتائج
+            
+        }
+
+        // وظائف التنقل بين الصفحات
+        function showPage(pageId) {
+            // تحديث تاريخ التنقل
+            if (navigationHistory[navigationHistory.length - 1] !== pageId) {
+                navigationHistory.push(pageId);
+            }
+            
+            // إخفاء جميع الصفحات
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // إظهار الصفحة المطلوبة
+            document.getElementById(pageId).classList.add('active');
+            
+            // تحديث القائمة السفلية
+            updateBottomNav(pageId);
+        }
+
+        function goBack() {
+            if (navigationHistory.length > 1) {
+                navigationHistory.pop(); // إزالة الصفحة الحالية
+                const previousPage = navigationHistory[navigationHistory.length - 1];
+                showPage(previousPage);
+            } else {
+                showPage('home-page');
+            }
+        }
+
+        function updateBottomNav(pageId) {
+            // تحديث الحالة النشطة في القائمة السفلية
+            document.querySelectorAll('.bottom-nav .nav-item').forEach(item => {
+                item.classList.remove('active');
+                
+                const itemPage = {
+                    'home-page': 0,
+                    'contact-page': 1,
+                    'about-page': 3,
+                    'account-page': 4
+                }[pageId];
+                
+                if (Array.from(document.querySelectorAll('.bottom-nav .nav-item')).indexOf(item) === itemPage) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // وظيفة القائمة الجانبية
+        function toggleSideMenu() {
+            document.getElementById('sideMenu').classList.toggle('active');
+        }
+
+        // إغلاق القائمة الجانبية عند النقر خارجها
+        document.addEventListener('click', function(event) {
+            const sideMenu = document.getElementById('sideMenu');
+            const menuButton = document.querySelector('.nav-item:nth-child(3)');
+            
+            if (sideMenu.classList.contains('active') && 
+                !sideMenu.contains(event.target) && 
+                !menuButton.contains(event.target)) {
+                sideMenu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
